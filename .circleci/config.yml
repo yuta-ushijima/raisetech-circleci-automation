@@ -38,4 +38,4 @@ workflows:
       - say-hello
   aws-cli:
     jobs:
-      - aws-cli-example:
+      - aws-cli-example
