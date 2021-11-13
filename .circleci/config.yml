@@ -23,9 +23,20 @@ jobs:
           name: "Wait Stack Complete"
           command: "aws cloudformation wait stack-create-complete --stack-name sampleStack"
 
+  ansible:
+    steps:
+      - checkout
+      - add_sssh_keys
+      - run:
+          name: "Connect ssh and echo Hello"
+          run: ssh ${USER_NAME}@${HOST_NAME} 'echo "Hello"'
+
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
   # aws-cli:
   #   jobs:
   #     - aws-cli-example
+  ansible:
+    jobs:
+      - ansible
