@@ -28,8 +28,8 @@ jobs:
         image: circleci/classic:edge
     steps:
       - checkout
-      - add_sssh_keys:
-        fingerprins:
+      - add_ssh_keys:
+         fingerprins:
           - "da:69:d5:98:13:b6:b2:f6:cc:e6:e5:f3:77:6d:85:75"    
       - run:
           name: "Connect ssh and echo Hello"
