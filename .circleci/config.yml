@@ -29,8 +29,8 @@ jobs:
     steps:
       - checkout
       - add_ssh_keys:
-         fingerprins:
-          - "da:69:d5:98:13:b6:b2:f6:cc:e6:e5:f3:77:6d:85:75"    
+        fingerprins:
+         - "da:69:d5:98:13:b6:b2:f6:cc:e6:e5:f3:77:6d:85:75"    
       - run:
           name: "Connect ssh and echo Hello"
           run: ssh ${USER_NAME}@${HOST_NAME} 'echo "Hello"'
