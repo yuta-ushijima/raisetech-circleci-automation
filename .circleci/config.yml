@@ -36,8 +36,7 @@ jobs:
       - ansible-playbook/playbook:
           inventory: ANSIBLE_INVENTORY
           playbook: playbook.yml
-          playbook-options: "-u ec2-user"
-          private-key: ANSIBLE_PRIVATE_KEY
+          playbook-options: "-u ec2-user --private-key ~/.ssh/id_rsa"
       - run:
           name: "Connect ssh and echo Hello"
           command: ssh ${USER_NAME}@${HOST_NAME} 'echo Hello'
