@@ -66,9 +66,11 @@ jobs:
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
-  # aws-cli:
-  #   jobs:
-  #     - aws-cli-example
-  ansible:
+  automation:
     jobs:
-      - ansible
+      - aws-cli-example:
+          name: 'Cloudformation'
+      - ansible:
+          name: 'Ansible'
+          requore:
+            - aws-cli-example
