@@ -23,15 +23,7 @@ jobs:
           command: echo "export STACK_EXIST_FLAG='false'" >> $BASH_ENV
       - run:
           name: "Check stack exsit"
-          command: |
-            if [`aws cloudformation list-stacks --stack-status-filter CREATE_COMPLETE | jq '.StackSummaries[].StackName' | grep 'sampleStack'`]; then
-              echo "export STACK_EXIST_FLAG='true'" >> $BASH_ENV
-            else
-              echo "export STACK_EXIST_FLAG='false'" >> $BASH_ENV
-            fi
-            echo "${STACK_EXIST_FLAG}"
-            
-      - run: "Upload Cloudformation files"
+          command: "sh check_stack_exist.sh"
       - when:
           condition: STACK_EXIST_FLAG
           steps:
