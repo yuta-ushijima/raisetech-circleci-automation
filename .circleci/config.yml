@@ -25,7 +25,8 @@ jobs:
           name: "Check stack exsit"
           command: "sh check_stack_exist.sh"
       - when:
-          condition: $STACK_EXIST_FLAG
+          condition:
+            equal: [ false, $STACK_EXIST_FLAG ]
           steps:
             - run:
                 name: "create Stack"
@@ -33,8 +34,9 @@ jobs:
             - run:
                 name: "Wait Stack Complete"
                 command: "aws cloudformation wait stack-create-complete --stack-name sampleStack"
-      - unless:
-          condition: $STACK_EXIST_FLAG
+      - when:
+          condition:
+            equal: [ true, $STACK_EXIST_FLAG ]
           steps:
             - run:
                 name: "update stack"
