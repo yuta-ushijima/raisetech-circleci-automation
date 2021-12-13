@@ -1,8 +1,6 @@
-#!/bin/bash
-
-if [ `aws cloudformation list-stacks --stack-status-filter CREATE_COMPLETE | jq '.StackSummaries[].StackName' | grep 'sampleStack'` ]; then
-  STACK_CHECK=true
+if [`aws cloudformation list-stacks --stack-status-filter CREATE_COMPLETE | jq '.StackSummaries[].StackName' | grep 'sampleStack'`]; then
+  echo "export STACK_EXIST_FLAG='true'" >> $BASH_ENV
 else
-  STACK_CHECK=false
+  echo "export STACK_EXIST_FLAG='false'" >> $BASH_ENV
 fi
-echo $STACK_CHECK
+echo "${STACK_EXIST_FLAG}"

@@ -24,10 +24,9 @@ jobs:
           aws-secret-access-key: AWS_SECRET_KEY
           aws-region: AWS_DEFAULT_REGION
       - run:
-          command: echo "export STACK_EXIST_FLAG='false'" >> $BASH_ENV
-      - run:
           name: "Check stack exsit"
           command: "sh check_stack_exist.sh"
+          stack_check: STACK_EXIST_FLAG
       - when:
           condition: << parameters.stack_check >>
           steps:
