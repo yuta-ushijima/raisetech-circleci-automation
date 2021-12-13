@@ -10,15 +10,15 @@ orbs:
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
-  parameters:
-    stack_finished_check:
-      type: boolean
-      default: false
-    stack_check:
-      type: boolean
-      default: false
   aws-cli-example:
     executor: aws-cli/default
+    parameters:
+      stack_finished_check:
+        type: boolean
+        default: false
+      stack_check:
+        type: boolean
+        default: false
     steps:
       - checkout
       - jq/install
@@ -44,10 +44,7 @@ jobs:
           steps:
             - run:
                 name: "update stack"
-                command: |
-                  aws cloudformation update-stack --stack-name sampleStack --region ap-northeast-1 --template-body file://sample_stack.yml
-                  RESULT="$?"
-                  echo $RESULT
+                command: "sh check_stack_finished.sh"
             - run:
                 name: "Wait Stack Complete"
                 command: "aws cloudformation wait stack-update-complete --stack-name sampleStack"
