@@ -45,9 +45,6 @@ jobs:
             - run:
                 name: "update stack"
                 command: "sh check_stack_finished.sh"
-            - run:
-                name: "Wait Stack Complete"
-                command: "aws cloudformation wait stack-update-complete --stack-name sampleStack"
 
   ansible:
     executor: ansible-playbook/default
