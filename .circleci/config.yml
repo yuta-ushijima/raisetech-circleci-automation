@@ -12,6 +12,10 @@ orbs:
 jobs:
   aws-cli-example:
     executor: aws-cli/default
+    parameters:
+      stack_check:
+        type: boolean
+        default: false
     steps:
       - checkout
       - jq/install
@@ -25,7 +29,7 @@ jobs:
           name: "Check stack exsit"
           command: "sh check_stack_exist.sh"
       - when:
-          condition: STACK_EXIST_FLAG
+          condition: << parameters.stack_check >>
           steps:
             - run:
                 name: "create Stack"
@@ -34,7 +38,7 @@ jobs:
                 name: "Wait Stack Complete"
                 command: "aws cloudformation wait stack-create-complete --stack-name sampleStack"
       - unless:
-          condition: STACK_EXIST_FLAG
+          condition: << parameters.stack_check >>
           steps:
             - run:
                 name: "update stack"
