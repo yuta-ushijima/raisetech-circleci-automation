@@ -1,8 +1,8 @@
 #!/bin/bash
 
 if [ `aws cloudformation list-stacks --stack-status-filter CREATE_COMPLETE | jq '.StackSummaries[].StackName' | grep 'sampleStack'` ]; then
-  stack_check = true
+  STACK_CHECK=true
 else
-  stack_check = false
+  STACK_CHECK=false
 fi
-echo stack_check
+echo $STACK_CHECK
